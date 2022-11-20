@@ -1,9 +1,22 @@
-//Asynchronous JavaScript
-//setTimeout() is an exmaple of Asynchronous Non Blocking function
+//Async Patterns 
 
 console.log('Before');
-setTimeout(() => {
-    console.log('Reading a user from database....');
-}, 2000);
-
+const user = getUser(1);
+console.log(user);
 console.log('After');
+
+function getUser(id) {
+   setTimeout(() => {
+    console.log('Reading a user from database....');
+    return {id: id, gitHubUsername: 'naquib1229'};
+},  2000);
+}
+
+
+
+//output
+
+//Before
+//undefined
+//After
+//Reading a user from database....
