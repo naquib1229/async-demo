@@ -10,6 +10,8 @@ function getUser(id) {
     console.log('Reading a user from database....');
     return {id: id, gitHubUsername: 'naquib1229'};
 },  2000);
+
+    return 1;
 }
 
 
