@@ -1,8 +1,11 @@
-//Callbacks
+//Callback Hell
+//Issue caused by coding with complex nested callbacks.
 
 console.log('Before');
 getUser(1, function(user) {
-    console.log('User', user);
+    getRepositories(user.gitHubUsername, (repos) => {
+        console.log('Repos' repos);
+    })
 });
 console.log('After');
 
@@ -13,12 +16,14 @@ function getUser(id, callback) {
 },  2000);
 }
 
-
+function getRepositories(username, callback){
+    setTimeout(() => {
+        console.log('Calling GitHub API.. ');
+        callback( ['repo1', 'repo2', 'repo3'] )
+    }, 2000);
+}
 
 //output
 
-//Before
-//After
-//Reading a user from database....
-//User { id: 1, gitHubUsername: 'naquib1229' }
+
 
