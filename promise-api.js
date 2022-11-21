@@ -1,14 +1,20 @@
-//Creating Settled Promises
-//In a writing unit test.So you want to simulate a scenario where an asynchronous operations like calling 
-// a web service completes successfully. In your unit test, you want to create a promise that is already 
-//resolved. that's why you need, you can call Promise, this is the Promise class, it has static method called resolve.
-//And this will return a promise that is already resolve, here we cann optionally pass a value.
+//Running Parallel Promises
+//Sometimes you want to run a few asynchronous operations in parallel, and when they all complete,
+//You want to something after
 
-const p = Promise.resolve({id: 1});
-p.then(result => console.log(result));
+const p1 = new Promise((resolve) => {
+    setTimeout(() => {
+        console.log('Async Operation 1 ...');
+        resolve(1);
+    }, 2000);
+});
 
-//similarly for reject
-/*
-const p = Promise.reject(new Error('reason for rejection'));
-p.catch(err => console.log('Error', err.message));
-*/
+const p2 = new Promise((resolve) => {
+    setTimeout(() => {
+        console.log('Async Operation 2 ...');
+        resolve(2);
+    }, 2000);
+});
+
+Promise.all([p1,p2]) //This method will return a new promise that will be resolved when all the promises in this array are resolved
+    .then(result => console.log(result));
