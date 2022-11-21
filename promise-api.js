@@ -1,11 +1,11 @@
 //Running Parallel Promises
-//Sometimes you want to run a few asynchronous operations in parallel, and when they all complete,
+//Sometimes you want to run a multiple asynchronous operations in parallel, and when one asynchronous operation completes,
 //You want to something after
 
-const p1 = new Promise((resolve, reject) => {
+const p1 = new Promise((resolve) => {
     setTimeout(() => {
         console.log('Async Operation 1 ...');
-        reject(new Error('Operation 1 failed'));
+        resolve(1);
     }, 2000);
 });
 
@@ -16,6 +16,6 @@ const p2 = new Promise((resolve) => {
     }, 2000);
 });
 
-Promise.all([p1,p2]) //If any of the promises rejected then Promise.all is considered rejected.
+Promise.race([p1,p2]) //If any of the promises resolved as soon as then Promise.race is considered resolved.
     .then(result => console.log(result))
     .catch(err => console.log('Error', err.message));
