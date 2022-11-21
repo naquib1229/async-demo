@@ -1,6 +1,4 @@
-//Promise
-//Holds the eventual result of an asynchronous operation
-//Pending ------->async operation          Fulfilled or rejected
+//Replacing callbacks with Promises
 
 console.log('Before');
 getUser(1, getRepositories);
@@ -18,25 +16,34 @@ function displayCommits(commits){
 }
 
 
-function getUser(id, callback) {
-   setTimeout(() => {
-    console.log('Reading a user from database....');
-    callback( {id: id, gitHubUsername: 'naquib1229'} );
-},  2000);
+function getUser(id) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('Reading a user from database....');
+            resolve( {id: id, gitHubUsername: 'naquib1229'} );
+        },  2000);
+    });
+   
 }
 
-function getRepositories(username, callback1){
-    setTimeout(() => {
+function getRepositories(username){
+    return new Promise((resolve, reject) => {
+       setTimeout(() => {
         console.log('Calling GitHub API.. ');
-        callback1(['repo1', 'repo2', 'repo3']);
-    }, 2000);
+        resolve(['repo1', 'repo2', 'repo3']);
+    }, 2000); 
+    });   
 }
-function getCommits(repo, callback){
-    setTimeout(() => {
+
+function getCommits(repo){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
         console.log('Fetching commits');
-        callback(['commit1', 'commit2']);
+        resolve(['commit1']);
     }, 2000);
+    });
 }
+    
 
 //output
 
