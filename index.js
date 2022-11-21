@@ -2,8 +2,8 @@
 
 console.log('Before');
 
-const p = getUser(1);
-p.then(user => console.log(user));
+getUser(1)
+    .then(user => console.log(user));
 
 console.log('After');
 
