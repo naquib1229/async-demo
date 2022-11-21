@@ -1,19 +1,13 @@
-//Replacing callbacks with Promises
+//Consuming Promises
 
 console.log('Before');
-getUser(1, getRepositories);
+
+const p = getUser(1);
+p.then(user => console.log(user));
 
 console.log('After');
 
-function getRepositories(user) {
-    getRepositories(user.gitHubUsername, getCommits);
-}
-function getCommits(repos){
-    getCommits(repo, displayCommits);
-}
-function displayCommits(commits){
-    console.log(commits);
-}
+
 
 
 function getUser(id) {
