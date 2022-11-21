@@ -12,10 +12,17 @@ console.log('Before');
 
 //Async and Await approach
 async function displayCommits() {
-    const user = await getUser(1);
+    try{
+      const user = await getUser(1);
     const repos = await getRepositories(user.gitHubUsername);
     const commits = await getCommits(repos[0]);
-    console.log(commits);
+    console.log(commits);  
+    }
+
+    catch(err){
+        console.log('Error', err.message);
+    }
+    
 }
 
 displayCommits();
@@ -35,7 +42,8 @@ function getRepositories(username){
     return new Promise((resolve, reject) => {
        setTimeout(() => {
         console.log('Calling GitHub API.. ');
-        resolve(['repo1', 'repo2', 'repo3']);
+        //resolve(['repo1', 'repo2', 'repo3']);
+        reject(new Error('Could not get the repos'));
     }, 2000); 
     });   
 }
